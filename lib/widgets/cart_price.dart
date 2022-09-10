@@ -3,7 +3,6 @@ import 'package:loved_store/models/cart_model.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class CartPrice extends StatelessWidget {
-
   final VoidCallback buy;
 
   CartPrice(this.buy);
@@ -15,8 +14,7 @@ class CartPrice extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(16.0),
         child: ScopedModelDescendant<CartModel>(
-          builder: (context, child, model){
-
+          builder: (context, child, model) {
             double price = model.getProductsPrice();
             double discount = model.getDiscount();
             double ship = model.getShipPrice();
@@ -29,7 +27,9 @@ class CartPrice extends StatelessWidget {
                   textAlign: TextAlign.start,
                   style: TextStyle(fontWeight: FontWeight.w500),
                 ),
-                SizedBox(height: 12.0,),
+                SizedBox(
+                  height: 12.0,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -54,17 +54,27 @@ class CartPrice extends StatelessWidget {
                   ],
                 ),
                 Divider(),
-                SizedBox(height: 12.0,),
+                SizedBox(
+                  height: 12.0,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text("Total",
-                      style: TextStyle(fontWeight: FontWeight.w500),),
-                    Text("R\$ ${(price + ship - discount).toStringAsFixed(2)}",
-                      style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 16.0),)
+                    Text(
+                      "Total",
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                    Text(
+                      "R\$ ${(price + ship - discount).toStringAsFixed(2)}",
+                      style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 16.0),
+                    )
                   ],
                 ),
-                SizedBox(height: 12.0,),
+                SizedBox(
+                  height: 12.0,
+                ),
                 RaisedButton(
                   child: Text("Finalizar Pedido"),
                   textColor: Colors.white,

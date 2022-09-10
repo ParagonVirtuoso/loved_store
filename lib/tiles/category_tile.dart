@@ -25,7 +25,8 @@ class CategoryTile extends StatelessWidget {
             child: Image.network(
               snapshot.data()["icon"],
               color: Theme.of(context).primaryColor,
-              loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent loadingProgress) {
+              loadingBuilder: (BuildContext context, Widget child,
+                  ImageChunkEvent loadingProgress) {
                 if (loadingProgress == null) return child;
                 return Center(
                   child: CircularProgressIndicator(),
@@ -39,10 +40,9 @@ class CategoryTile extends StatelessWidget {
           style: TextStyle(fontSize: ScreenUtil().setSp(40)),
         ),
         trailing: FaIcon(FontAwesomeIcons.angleRight),
-        onTap: (){
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (context)=>CategoryScreen(snapshot))
-          );
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => CategoryScreen(snapshot)));
         },
       ),
     );

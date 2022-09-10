@@ -4,10 +4,8 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class UserModel extends Model{
-
+class UserModel extends Model {
   FirebaseAuth _auth = FirebaseAuth.instance;
-
 
   Map<String, dynamic> userData = Map();
 
@@ -15,24 +13,29 @@ class UserModel extends Model{
 
   User firebaseUser;
 
-  static UserModel of(BuildContext context) => 
+  static UserModel of(BuildContext context) =>
       ScopedModel.of<UserModel>(context);
 
   @override
-  void addListener(VoidCallback listener){
+  void addListener(VoidCallback listener) {
     super.addListener(listener);
 
     _loadCurrentUser();
   }
 
-  Future<void> signUp({ @required Map<String, dynamic> userData, @required String pass, @required VoidCallback onSuccess,  @required VoidCallback onFail}) async {
+  Future<void> signUp(
+      {@required Map<String, dynamic> userData,
+      @required String pass,
+      @required VoidCallback onSuccess,
+      @required VoidCallback onFail}) async {
     isLoading = true;
     notifyListeners();
 
     firebaseUser = (await _auth.createUserWithEmailAndPassword(
-    email: userData["email"],
-    password: pass,
-    )).user;
+      email: userData["email"],
+      password: pass,
+    ))
+        .user;
 
     await _saveUserData(userData);
 
@@ -63,47 +66,46 @@ class UserModel extends Model{
 
     });
     */
+  }
 
-}
-
-  Future<void> signIn({@required String email,@required String pass,@required VoidCallback onSuccess,@required VoidCallback onFail}) async {
+  Future<void> signIn(
+      {@required String email,
+      @required String pass,
+      @required VoidCallback onSuccess,
+      @required VoidCallback onFail}) async {
     isLoading = true;
     notifyListeners();
 
-    try{
-      firebaseUser = (await FirebaseAuth.instance.
-      signInWithEmailAndPassword(email: email, password: pass))
+    try {
+      firebaseUser = (await FirebaseAuth.instance
+              .signInWithEmailAndPassword(email: email, password: pass))
           .user;
       await _loadCurrentUser();
       onSuccess();
       isLoading = false;
       notifyListeners();
-
-
-    }catch (e){
+    } catch (e) {
       onFail();
       print(e.toString());
       isLoading = false;
       notifyListeners();
     }
-
   }
 
-  void recoverPass(String email){
-
+  void recoverPass(String email) {
     _auth.sendPasswordResetEmail(email: email);
-
   }
 
-  bool isLoggedIn(){
-
+  bool isLoggedIn() {
     return firebaseUser != null;
-
   }
 
   Future<Null> _saveUserData(Map<String, dynamic> userData) async {
     this.userData = userData;
-    await FirebaseFirestore.instance.collection("usuarios").doc(firebaseUser.uid).set(userData);
+    await FirebaseFirestore.instance
+        .collection("usuarios")
+        .doc(firebaseUser.uid)
+        .set(userData);
   }
 
   void signOut() async {
@@ -112,21 +114,21 @@ class UserModel extends Model{
     userData = Map();
     firebaseUser = null;
     notifyListeners();
-
   }
 
-  Future<Null> _loadCurrentUser() async{
-    if(firebaseUser == null){
+  Future<Null> _loadCurrentUser() async {
+    if (firebaseUser == null) {
       firebaseUser = _auth.currentUser;
     }
-    if(firebaseUser != null){
-      if(userData["name"] == null){
-        DocumentSnapshot docUser = await FirebaseFirestore.instance.collection("usuarios").doc(firebaseUser.uid).get();
+    if (firebaseUser != null) {
+      if (userData["name"] == null) {
+        DocumentSnapshot docUser = await FirebaseFirestore.instance
+            .collection("usuarios")
+            .doc(firebaseUser.uid)
+            .get();
         userData = docUser.data();
       }
     }
     notifyListeners();
-
   }
-
 }

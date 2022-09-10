@@ -11,7 +11,6 @@ class HomeTab extends StatelessWidget {
   HomeTab(this.pageController);
   @override
   Widget build(BuildContext context) {
-
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
     Widget _buildBodyBack() => Container(
@@ -28,7 +27,7 @@ class HomeTab extends StatelessWidget {
       children: [
         _buildBodyBack(),
         CustomScrollView(
-          slivers: [
+          slivers: <Widget>[
             SliverAppBar(
               floating: true,
               snap: true,
@@ -61,67 +60,74 @@ class HomeTab extends StatelessWidget {
                       ),
                     ),
                   );
-                } else
-                  return SliverStaggeredGrid.count(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 1.0,
-                    crossAxisSpacing: 1.0,
-                    staggeredTiles: snapshot.data.docs.map((doc) {
-                      return StaggeredTile.count(
-                          doc.data()["x"], doc.data()["y"]);
-                    }).toList(),
-                    children: snapshot.data.docs.map((doc) {
-                      return Container(
-                        padding: EdgeInsets.only(
-                            left: ScreenUtil().setWidth(22.0),
-                            right: ScreenUtil().setWidth(22.0),
-                            top: ScreenUtil().setHeight(15.0),
-                            bottom: ScreenUtil().setHeight(15.0)),
-                        child: InkWell(
-                          onTap: (){
-
-                            pageController.jumpToPage(5);
-                          },
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(ScreenUtil().setSp(20))),
-                              child: Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  FadeInImage.memoryNetwork(
-                                    placeholder: kTransparentImage,
-                                    image: doc.data()["image"],
-                                    width: double.infinity,
-                                    height: double.infinity,
-                                    fit: BoxFit.cover,
-                                  ),
-                                  Container(
-                                    alignment: Alignment.bottomCenter,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(
-                                              ScreenUtil().setSp(20))),
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        color: Color.fromARGB(150, 231, 140, 160),
-                                        height: ScreenUtil().setHeight(70),
-                                        width: ScreenUtil().setWidth(230),
-                                        child: Text(
-                                          "R\$" + doc.data()["valor"].toString(),
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: ScreenUtil().setSp(40)),
+                } else {
+                  return SliverToBoxAdapter(
+                    child: StaggeredGrid.count(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 1.0,
+                      crossAxisSpacing: 1.0,
+                      children: snapshot.data.docs.map((doc) {
+                        return StaggeredGridTile.count(
+                          crossAxisCellCount: doc.data()["x"],
+                          mainAxisCellCount: doc.data()["y"],
+                          child: Container(
+                            padding: EdgeInsets.only(
+                                left: ScreenUtil().setWidth(22.0),
+                                right: ScreenUtil().setWidth(22.0),
+                                top: ScreenUtil().setHeight(15.0),
+                                bottom: ScreenUtil().setHeight(15.0)),
+                            child: InkWell(
+                              onTap: () {
+                                pageController.jumpToPage(5);
+                              },
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(ScreenUtil().setSp(20))),
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      FadeInImage.memoryNetwork(
+                                        placeholder: kTransparentImage,
+                                        image: doc.data()["image"],
+                                        width: double.infinity,
+                                        height: double.infinity,
+                                        fit: BoxFit.cover,
+                                      ),
+                                      Container(
+                                        alignment: Alignment.bottomCenter,
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(
+                                                  ScreenUtil().setSp(20))),
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            color: Color.fromARGB(
+                                                150, 231, 140, 160),
+                                            height: ScreenUtil().setHeight(70),
+                                            width: ScreenUtil().setWidth(230),
+                                            child: Text(
+                                              "R\$" +
+                                                  doc
+                                                      .data()["valor"]
+                                                      .toString(),
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize:
+                                                      ScreenUtil().setSp(40)),
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                ],
-                              )),
-                        ),
-                      );
-                    }).toList(),
+                                    ],
+                                  )),
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    ),
                   );
+                }
               },
             )
           ],

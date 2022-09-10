@@ -10,10 +10,9 @@ class ProductTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
+      onTap: () {
         Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => ProductScreen(product))
-        );
+            MaterialPageRoute(builder: (context) => ProductScreen(product)));
       },
       child: Card(
         child: Column(
@@ -25,7 +24,8 @@ class ProductTile extends StatelessWidget {
               child: Image.network(
                 product.images[0],
                 fit: BoxFit.cover,
-                loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent loadingProgress) {
+                loadingBuilder: (BuildContext context, Widget child,
+                    ImageChunkEvent loadingProgress) {
                   if (loadingProgress == null) return child;
                   return Center(
                     child: CircularProgressIndicator(),
@@ -44,7 +44,9 @@ class ProductTile extends StatelessWidget {
                   children: [
                     Text(
                       product.title,
-                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: ScreenUtil().setSp(22)),
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: ScreenUtil().setSp(22)),
                     ),
                     Text(
                       "R\$ ${product.preco.toStringAsFixed(2)}",
