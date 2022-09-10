@@ -9,10 +9,8 @@ class ShipCard extends StatelessWidget {
         title: Text(
           "Cálcular Frete",
           textAlign: TextAlign.start,
-          style: TextStyle(
-              fontWeight: FontWeight.w500,
-              color: Colors.grey[700]
-          ),
+          style:
+              TextStyle(fontWeight: FontWeight.w500, color: Colors.grey[700]),
         ),
         leading: Icon(Icons.location_on),
         children: <Widget>[
@@ -20,13 +18,9 @@ class ShipCard extends StatelessWidget {
             padding: EdgeInsets.all(8.0),
             child: TextFormField(
               decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: "Digite seu CEP"
-              ),
+                  border: OutlineInputBorder(), hintText: "Digite seu CEP"),
               initialValue: "",
-              onFieldSubmitted: (text){
-
-              },
+              onFieldSubmitted: (text) {},
             ),
           )
         ],

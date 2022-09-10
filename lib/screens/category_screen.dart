@@ -16,7 +16,7 @@ class CategoryScreen extends StatelessWidget {
           leading: IconButton(
             iconSize: 50.sp,
             padding: EdgeInsets.only(left: 40.w),
-            icon: FaIcon(FontAwesomeIcons.caretLeft,color: Colors.white),
+            icon: FaIcon(FontAwesomeIcons.caretLeft, color: Colors.white),
             onPressed: () => Navigator.of(context).pop(),
           ),
           elevation: 0.0,
@@ -37,8 +37,7 @@ class CategoryScreen extends StatelessWidget {
               } else
                 return GridView.builder(
                     padding: EdgeInsets.all(ScreenUtil().setSp(10.0)),
-                    gridDelegate:
-                    SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       mainAxisSpacing: ScreenUtil().setSp(10),
                       crossAxisSpacing: ScreenUtil().setSp(10),
@@ -46,10 +45,8 @@ class CategoryScreen extends StatelessWidget {
                     ),
                     itemCount: snapshot.data.docs.length,
                     itemBuilder: (context, index) {
-
                       ProductData data =
-                      ProductData.fromDocument(
-                          snapshot.data.docs[index]);
+                          ProductData.fromDocument(snapshot.data.docs[index]);
 
                       data.category = this.snapshot.id;
 

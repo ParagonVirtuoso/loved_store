@@ -11,23 +11,20 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp();
 
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-
-
-
-
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return ScopedModel<UserModel>(
-      model: UserModel(),
-      child: ScopedModelDescendant<UserModel>(
-        builder: (context, child, model){
+        model: UserModel(),
+        child:
+            ScopedModelDescendant<UserModel>(builder: (context, child, model) {
           return ScopedModel<CartModel>(
             model: CartModel(model),
             child: MaterialApp(
@@ -41,10 +38,6 @@ class MyApp extends StatelessWidget {
               home: HomeScreen(),
             ),
           );
-        }
-      )
-    );
+        }));
   }
-
-
 }
