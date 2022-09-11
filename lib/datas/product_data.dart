@@ -19,6 +19,6 @@ class ProductData {
   }
 
   Map<String, dynamic> toResumedMap() {
-    return {"title": title, "description": description, "price": preco};
+    return {"title": title, "price": preco};
   }
 }
