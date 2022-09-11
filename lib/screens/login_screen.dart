@@ -88,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       color: Colors.grey[700]),
                                   keyboardType: TextInputType.emailAddress,
                                   validator: (text) {
-                                    if (text.isEmpty || !text.contains("@")) {
+                                    if (text!.isEmpty || !text.contains("@")) {
                                       return null;
                                     } else
                                       return null;
@@ -156,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                   obscureText: true,
                                   validator: (text) {
-                                    if (text.isEmpty || text.length < 6)
+                                    if (text!.isEmpty || text.length < 6)
                                       return null;
                                     else
                                       return null;
@@ -173,7 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                               255, 255, 255, 255))),
                                   color: Theme.of(context).primaryColor,
                                   onPressed: () {
-                                    if (_formkey.currentState.validate()) {}
+                                    if (_formkey.currentState!.validate()) {}
                                     model.signIn(
                                         email: _emailController.text,
                                         pass: _senhaController.text,
@@ -215,7 +215,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     padding: EdgeInsets.zero,
                                     onPressed: () {
                                       if (_emailController.text.isEmpty) {
-                                        _scaffoldKey.currentState
+                                        _scaffoldKey.currentState!
                                             .showSnackBar(SnackBar(
                                           content: Text(
                                               "Insira o email para recuperação!"),
@@ -225,7 +225,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       } else {
                                         model
                                             .recoverPass(_emailController.text);
-                                        _scaffoldKey.currentState
+                                        _scaffoldKey.currentState!
                                             .showSnackBar(SnackBar(
                                           content: Text(
                                               "Recuperação enviada ao seu Email!"),
@@ -399,7 +399,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _onFail() {
-    _scaffoldKey.currentState.showSnackBar(SnackBar(
+    _scaffoldKey.currentState!.showSnackBar(SnackBar(
       content: Text("Falha ao entrar, verifique o email ou senha!"),
       backgroundColor: Colors.redAccent,
       duration: Duration(seconds: 2),
@@ -407,7 +407,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _onSuccess() {
-    _scaffoldKey.currentState.showSnackBar(SnackBar(
+    _scaffoldKey.currentState!.showSnackBar(SnackBar(
       content: Text("Login realizado com sucesso!"),
       backgroundColor: Theme.of(context).primaryColor,
       duration: Duration(seconds: 2),

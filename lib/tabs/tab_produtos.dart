@@ -14,7 +14,7 @@ class TabProdutos extends StatelessWidget {
             );
           } else {
             var dividedTiles = ListTile.divideTiles(
-                    tiles: snapshot.data.docs.map((doc) {
+                    tiles: snapshot.data!.docs.map((doc) {
                       return CategoryTile(doc);
                     }).toList(),
                     color: Colors.grey[500])

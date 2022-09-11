@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/screenutil.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -66,10 +66,10 @@ class HomeTab extends StatelessWidget {
                       crossAxisCount: 2,
                       mainAxisSpacing: 1.0,
                       crossAxisSpacing: 1.0,
-                      children: snapshot.data.docs.map((doc) {
+                      children: snapshot.data!.docs.map((doc) {
                         return StaggeredGridTile.count(
-                          crossAxisCellCount: doc.data()["x"],
-                          mainAxisCellCount: doc.data()["y"],
+                          crossAxisCellCount: doc["x"],
+                          mainAxisCellCount: doc["y"],
                           child: Container(
                             padding: EdgeInsets.only(
                                 left: ScreenUtil().setWidth(22.0),
@@ -88,7 +88,7 @@ class HomeTab extends StatelessWidget {
                                     children: [
                                       FadeInImage.memoryNetwork(
                                         placeholder: kTransparentImage,
-                                        image: doc.data()["image"],
+                                        image: doc["image"],
                                         width: double.infinity,
                                         height: double.infinity,
                                         fit: BoxFit.cover,
@@ -106,10 +106,7 @@ class HomeTab extends StatelessWidget {
                                             height: ScreenUtil().setHeight(70),
                                             width: ScreenUtil().setWidth(230),
                                             child: Text(
-                                              "R\$" +
-                                                  doc
-                                                      .data()["valor"]
-                                                      .toString(),
+                                              "R\$" + doc["valor"].toString(),
                                               style: TextStyle(
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.bold,

@@ -11,7 +11,7 @@ class UserModel extends Model {
 
   bool isLoading = false;
 
-  User firebaseUser;
+  User? firebaseUser;
 
   static UserModel of(BuildContext context) =>
       ScopedModel.of<UserModel>(context);
@@ -24,10 +24,10 @@ class UserModel extends Model {
   }
 
   Future<void> signUp(
-      {@required Map<String, dynamic> userData,
-      @required String pass,
-      @required VoidCallback onSuccess,
-      @required VoidCallback onFail}) async {
+      {required Map<String, dynamic> userData,
+      required String pass,
+      required VoidCallback onSuccess,
+      required VoidCallback onFail}) async {
     isLoading = true;
     notifyListeners();
 
@@ -69,10 +69,10 @@ class UserModel extends Model {
   }
 
   Future<void> signIn(
-      {@required String email,
-      @required String pass,
-      @required VoidCallback onSuccess,
-      @required VoidCallback onFail}) async {
+      {required String email,
+      required String pass,
+      required VoidCallback onSuccess,
+      required VoidCallback onFail}) async {
     isLoading = true;
     notifyListeners();
 
@@ -104,7 +104,7 @@ class UserModel extends Model {
     this.userData = userData;
     await FirebaseFirestore.instance
         .collection("usuarios")
-        .doc(firebaseUser.uid)
+        .doc(firebaseUser!.uid)
         .set(userData);
   }
 
@@ -124,9 +124,9 @@ class UserModel extends Model {
       if (userData["name"] == null) {
         DocumentSnapshot docUser = await FirebaseFirestore.instance
             .collection("usuarios")
-            .doc(firebaseUser.uid)
+            .doc(firebaseUser!.uid)
             .get();
-        userData = docUser.data();
+        userData = docUser.data() as Map<String, dynamic>;
       }
     }
     notifyListeners();

@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loved_store/screens/category_screen.dart';
 
 class CategoryTile extends StatelessWidget {
-  final DocumentSnapshot snapshot;
+  final DocumentSnapshot? snapshot;
 
   CategoryTile(this.snapshot);
 
@@ -23,10 +23,10 @@ class CategoryTile extends StatelessWidget {
           backgroundColor: Colors.transparent,
           child: Container(
             child: Image.network(
-              snapshot.data()["icon"],
+              snapshot!['icon'],
               color: Theme.of(context).primaryColor,
               loadingBuilder: (BuildContext context, Widget child,
-                  ImageChunkEvent loadingProgress) {
+                  ImageChunkEvent? loadingProgress) {
                 if (loadingProgress == null) return child;
                 return Center(
                   child: CircularProgressIndicator(),
@@ -36,13 +36,13 @@ class CategoryTile extends StatelessWidget {
           ),
         ),
         title: Text(
-          snapshot.data()["title"],
+          snapshot!["title"],
           style: TextStyle(fontSize: ScreenUtil().setSp(40)),
         ),
         trailing: FaIcon(FontAwesomeIcons.angleRight),
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => CategoryScreen(snapshot)));
+              builder: (context) => CategoryScreen(snapshot!)));
         },
       ),
     );

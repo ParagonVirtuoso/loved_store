@@ -18,7 +18,6 @@ class CartPrice extends StatelessWidget {
             double price = model.getProductsPrice();
             double discount = model.getDiscount();
             double ship = model.getShipPrice();
-
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[

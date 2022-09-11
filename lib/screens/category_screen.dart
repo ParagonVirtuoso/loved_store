@@ -20,7 +20,7 @@ class CategoryScreen extends StatelessWidget {
             onPressed: () => Navigator.of(context).pop(),
           ),
           elevation: 0.0,
-          title: Text(snapshot.data()["title"]),
+          title: Text(snapshot["title"]),
           centerTitle: true,
         ),
         body: FutureBuilder<QuerySnapshot>(
@@ -43,10 +43,10 @@ class CategoryScreen extends StatelessWidget {
                       crossAxisSpacing: ScreenUtil().setSp(10),
                       childAspectRatio: 0.65,
                     ),
-                    itemCount: snapshot.data.docs.length,
+                    itemCount: snapshot.data!.docs.length,
                     itemBuilder: (context, index) {
                       ProductData data =
-                          ProductData.fromDocument(snapshot.data.docs[index]);
+                          ProductData.fromDocument(snapshot.data!.docs[index]);
 
                       data.category = this.snapshot.id;
 

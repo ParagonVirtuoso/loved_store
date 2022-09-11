@@ -95,7 +95,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     color: Colors.grey[700]),
                                 keyboardType: TextInputType.name,
                                 validator: (text) {
-                                  if (text.isEmpty || !text.contains(" ")) {
+                                  if (text!.isEmpty || !text.contains(" ")) {
                                     return null;
                                   } else
                                     return null;
@@ -141,7 +141,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     color: Colors.grey[700]),
                                 keyboardType: TextInputType.number,
                                 validator: (text) {
-                                  if (text.isEmpty || text.length < 11) {
+                                  if (text!.isEmpty || text.length < 11) {
                                     return null;
                                   } else
                                     return null;
@@ -187,7 +187,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     color: Colors.grey[700]),
                                 keyboardType: TextInputType.streetAddress,
                                 validator: (text) {
-                                  if (text.isEmpty) {
+                                  if (text!.isEmpty) {
                                     return null;
                                   } else
                                     return null;
@@ -233,7 +233,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     color: Colors.grey[700]),
                                 keyboardType: TextInputType.emailAddress,
                                 validator: (text) {
-                                  if (text.isEmpty || !text.contains("@")) {
+                                  if (text!.isEmpty || !text.contains("@")) {
                                     return null;
                                   } else
                                     return null;
@@ -299,7 +299,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                                 obscureText: true,
                                 validator: (text) {
-                                  if (text.isEmpty || text.length < 6)
+                                  if (text!.isEmpty || text.length < 6)
                                     return null;
                                   else
                                     return null;
@@ -316,7 +316,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                             255, 255, 255, 255))),
                                 color: Theme.of(context).primaryColor,
                                 onPressed: () {
-                                  if (_formkey.currentState.validate()) {
+                                  if (_formkey.currentState!.validate()) {
                                     Map<String, dynamic> userData = {
                                       "name": _nameController.text,
                                       "cpf": _cpfController.text,
@@ -347,7 +347,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void _onFail() {
-    _scaffoldKey.currentState.showSnackBar(SnackBar(
+    _scaffoldKey.currentState!.showSnackBar(SnackBar(
       content: Text("Falha ao entrar!"),
       backgroundColor: Colors.redAccent,
       duration: Duration(seconds: 2),
@@ -355,7 +355,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void _onSuccess() {
-    _scaffoldKey.currentState.showSnackBar(SnackBar(
+    _scaffoldKey.currentState!.showSnackBar(SnackBar(
       content: Text("Usuário criado com sucesso!"),
       backgroundColor: Theme.of(context).primaryColor,
       duration: Duration(seconds: 2),

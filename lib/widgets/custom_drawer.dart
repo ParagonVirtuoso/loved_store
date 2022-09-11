@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/screenutil.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loved_store/models/user_model.dart';
 import 'package:loved_store/screens/login_screen.dart';
 import 'package:loved_store/tiles/drawer_tile.dart';
