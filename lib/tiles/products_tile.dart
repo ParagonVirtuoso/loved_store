@@ -37,9 +37,9 @@ class ProductTile extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.fromLTRB(
                     ScreenUtil().setWidth(15.0),
-                    ScreenUtil().setHeight(15.0),
+                    ScreenUtil().setHeight(10.0),
                     ScreenUtil().setWidth(15.0),
-                    ScreenUtil().setHeight(15.0)),
+                    ScreenUtil().setHeight(10.0)),
                 child: Column(
                   children: [
                     Text(
