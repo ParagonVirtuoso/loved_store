@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/screenutil.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loved_store/tabs/home_tab.dart';
+import 'package:loved_store/tabs/orders_tab.dart';
 import 'package:loved_store/tabs/tab_produtos.dart';
 import 'package:loved_store/widgets/cart_button.dart';
 import 'package:loved_store/widgets/custom_drawer.dart';
@@ -41,9 +42,15 @@ class HomeScreen extends StatelessWidget {
               child: CustomDrawer(_pageController),
             ),
             body: TabProdutos()),
-        Container(color: Colors.pink),
+        Scaffold(
+          appBar: AppBar(
+            title: Text("Meus Pedidos"),
+            centerTitle: true,
+          ),
+          body: OrdersTab(),
+          drawer: CustomDrawer(_pageController),
+        ),
         Container(color: Colors.deepOrange),
-        Container(color: Colors.blue)
       ],
     );
   }

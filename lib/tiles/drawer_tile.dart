@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/screenutil.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DrawerTile extends StatelessWidget {
   final IconData icon;
@@ -26,7 +26,7 @@ class DrawerTile extends StatelessWidget {
               Icon(
                 icon,
                 size: ScreenUtil().setSp(65),
-                color: controller.page.round() == page
+                color: controller.page?.round() == page
                     ? Theme.of(context).primaryColor
                     : Colors.grey[700],
               ),
@@ -37,7 +37,7 @@ class DrawerTile extends StatelessWidget {
                 text,
                 style: TextStyle(
                   fontSize: ScreenUtil().setSp(33.0),
-                  color: controller.page.round() == page
+                  color: controller.page?.round() == page
                       ? Theme.of(context).primaryColor
                       : Colors.grey[700],
                 ),
