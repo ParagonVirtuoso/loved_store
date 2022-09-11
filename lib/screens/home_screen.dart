@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loved_store/tabs/home_tab.dart';
 import 'package:loved_store/tabs/orders_tab.dart';
+import 'package:loved_store/tabs/places_tab.dart';
 import 'package:loved_store/tabs/tab_produtos.dart';
 import 'package:loved_store/widgets/cart_button.dart';
 import 'package:loved_store/widgets/custom_drawer.dart';
@@ -50,7 +51,14 @@ class HomeScreen extends StatelessWidget {
           body: OrdersTab(),
           drawer: CustomDrawer(_pageController),
         ),
-        Container(color: Colors.deepOrange),
+        Scaffold(
+          appBar: AppBar(
+            title: Text("Loja"),
+            centerTitle: true,
+          ),
+          body: PlacesTab(),
+          drawer: CustomDrawer(_pageController),
+        ),
       ],
     );
   }
