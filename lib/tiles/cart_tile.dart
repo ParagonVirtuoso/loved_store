@@ -5,15 +5,13 @@ import 'package:loved_store/datas/product_data.dart';
 import 'package:loved_store/models/cart_model.dart';
 
 class CartTile extends StatelessWidget {
-
   final CartProduct cartProduct;
 
   CartTile(this.cartProduct);
 
   @override
   Widget build(BuildContext context) {
-
-    Widget _buildContent(){
+    Widget _buildContent() {
       CartModel.of(context).updatePrices();
 
       return Row(
@@ -23,7 +21,7 @@ class CartTile extends StatelessWidget {
             padding: EdgeInsets.all(8.0),
             width: 120.0,
             child: Image.network(
-              cartProduct.productData.images[0],
+              cartProduct.productData!.images![0],
               fit: BoxFit.cover,
             ),
           ),
@@ -35,44 +33,45 @@ class CartTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    cartProduct.productData.title,
-                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 17.0),
+                    cartProduct.productData!.title!,
+                    style:
+                        TextStyle(fontWeight: FontWeight.w500, fontSize: 17.0),
                   ),
                   Text(
                     "Tamanho: ${cartProduct.size}",
                     style: TextStyle(fontWeight: FontWeight.w300),
                   ),
                   Text(
-                    "R\$ ${cartProduct.productData.preco.toStringAsFixed(2)}",
+                    "R\$ ${cartProduct.productData!.preco!.toStringAsFixed(2)}",
                     style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold
-                    ),
+                        color: Theme.of(context).primaryColor,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       IconButton(
-                          icon: Icon(Icons.remove),
-                          color: Theme.of(context).primaryColor,
-                          onPressed: cartProduct.quantity > 1 ?
-                          (){
-                            CartModel.of(context).decProduct(cartProduct);
-                          } : null,
+                        icon: Icon(Icons.remove),
+                        color: Theme.of(context).primaryColor,
+                        onPressed: cartProduct.quantity > 1
+                            ? () {
+                                CartModel.of(context).decProduct(cartProduct);
+                              }
+                            : null,
                       ),
                       Text(cartProduct.quantity.toString()),
                       IconButton(
                         icon: Icon(Icons.add),
                         color: Theme.of(context).primaryColor,
-                        onPressed: (){
+                        onPressed: () {
                           CartModel.of(context).incProduct(cartProduct);
                         },
                       ),
                       FlatButton(
                         child: Text("Remover"),
                         textColor: Colors.grey[500],
-                        onPressed: (){
+                        onPressed: () {
                           CartModel.of(context).removeCartItem(cartProduct);
                         },
                       )
@@ -87,25 +86,29 @@ class CartTile extends StatelessWidget {
     }
 
     return Card(
-      margin: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-      child: cartProduct.productData == null ?
-        FutureBuilder<DocumentSnapshot>(
-          future: FirebaseFirestore.instance.collection("produtos").doc(cartProduct.category)
-          .collection("items").doc(cartProduct.pid).get(),
-          builder: (context, snapshot){
-            if(snapshot.hasData){
-              cartProduct.productData = ProductData.fromDocument(snapshot.data);
-              return _buildContent();
-            } else {
-              return Container(
-                height: 70.0,
-                child: CircularProgressIndicator(),
-                alignment: Alignment.center,
-              );
-            }
-          },
-        ) :
-          _buildContent()
-    );
+        margin: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+        child: cartProduct.productData == null
+            ? FutureBuilder<DocumentSnapshot>(
+                future: FirebaseFirestore.instance
+                    .collection("produtos")
+                    .doc(cartProduct.category)
+                    .collection("items")
+                    .doc(cartProduct.pid)
+                    .get(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    cartProduct.productData =
+                        ProductData.fromDocument(snapshot.data!);
+                    return _buildContent();
+                  } else {
+                    return Container(
+                      height: 70.0,
+                      child: CircularProgressIndicator(),
+                      alignment: Alignment.center,
+                    );
+                  }
+                },
+              )
+            : _buildContent());
   }
 }

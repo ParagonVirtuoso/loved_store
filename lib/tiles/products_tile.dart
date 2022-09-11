@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/screenutil.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loved_store/datas/product_data.dart';
 import 'package:loved_store/screens/product_screen.dart';
 
@@ -10,10 +10,9 @@ class ProductTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
+      onTap: () {
         Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => ProductScreen(product))
-        );
+            MaterialPageRoute(builder: (context) => ProductScreen(product)));
       },
       child: Card(
         child: Column(
@@ -23,9 +22,10 @@ class ProductTile extends StatelessWidget {
             AspectRatio(
               aspectRatio: 0.8,
               child: Image.network(
-                product.images[0],
+                product.images![0],
                 fit: BoxFit.cover,
-                loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent loadingProgress) {
+                loadingBuilder: (BuildContext context, Widget child,
+                    ImageChunkEvent? loadingProgress) {
                   if (loadingProgress == null) return child;
                   return Center(
                     child: CircularProgressIndicator(),
@@ -43,11 +43,13 @@ class ProductTile extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      product.title,
-                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: ScreenUtil().setSp(22)),
+                      product.title!,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: ScreenUtil().setSp(22)),
                     ),
                     Text(
-                      "R\$ ${product.preco.toStringAsFixed(2)}",
+                      "R\$ ${product.preco!.toStringAsFixed(2)}",
                       style: TextStyle(
                           color: Theme.of(context).primaryColor,
                           fontSize: ScreenUtil().setSp(38),

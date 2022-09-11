@@ -29,7 +29,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
         leading: IconButton(
           iconSize: 58.sp,
           padding: EdgeInsets.only(left: 40.w),
-          icon: FaIcon(FontAwesomeIcons.caretLeft,color: Theme.of(context).primaryColor),
+          icon: FaIcon(FontAwesomeIcons.caretLeft,
+              color: Theme.of(context).primaryColor),
           onPressed: () => Navigator.of(context).pop(),
         ),
         elevation: 0.0,
@@ -42,14 +43,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
             direction: Axis.vertical,
             children: <Widget>[
               ScopedModelDescendant<UserModel>(
-                builder: (context,child, model){
-                  if(model.isLoading){
-                    return Center(
-                      heightFactor: 30.w,
-                      child: CircularProgressIndicator(),
-                    );
-                  }else
-                    return Form(
+                  builder: (context, child, model) {
+                if (model.isLoading) {
+                  return Center(
+                    heightFactor: 30.w,
+                    child: CircularProgressIndicator(),
+                  );
+                } else
+                  return Form(
                     key: _formkey,
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -66,33 +67,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                           ),
                           Container(
-                              margin: EdgeInsets.only(
-                                  top: 35.h,
-                                  bottom: 10.h),
+                              margin: EdgeInsets.only(top: 35.h, bottom: 10.h),
                               child: Text(
                                 "Insira suas informações para o cadastro",
                                 style: TextStyle(
-                                    color: Colors.grey[700],
-                                    fontSize: 30.sp),
-                              )
-                          ),
-
+                                    color: Colors.grey[700], fontSize: 30.sp),
+                              )),
                           Container(
                               margin: EdgeInsets.only(
-                                  top: 35.h,
-                                  right: 320.w,
-                                  bottom: 10.h),
+                                  top: 35.h, right: 320.w, bottom: 10.h),
                               child: Text(
                                 "Nome Completo",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.grey[700],
                                     fontSize: 32.sp),
-                              )
-                          ),
+                              )),
                           Container(
-                              margin: EdgeInsets.only(
-                                  bottom: 20.h),
+                              margin: EdgeInsets.only(bottom: 20.h),
                               width: 620.w,
                               height: ScreenUtil().setHeight(65),
                               child: TextFormField(
@@ -102,47 +94,43 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     fontSize: 34.sp,
                                     color: Colors.grey[700]),
                                 keyboardType: TextInputType.name,
-                                validator: (text){
-                                  if(text.isEmpty || !text.contains(" ")){
+                                validator: (text) {
+                                  if (text!.isEmpty || !text.contains(" ")) {
                                     return null;
-                                  }
-                                  else
+                                  } else
                                     return null;
                                 },
                                 decoration: InputDecoration(
                                   hintText: 'Seu nome e sobrenome',
                                   contentPadding:
-                                  EdgeInsets.fromLTRB(50.w, 1.h, 50.w, 1.h),
+                                      EdgeInsets.fromLTRB(50.w, 1.h, 50.w, 1.h),
                                   enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(30.sp)),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(30.sp)),
                                     borderSide: BorderSide(
                                         color: Theme.of(context).primaryColor),
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(30.sp)),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(30.sp)),
                                     borderSide: BorderSide(
-                                        color: Color.fromARGB(255, 244, 43, 75)),
+                                        color:
+                                            Color.fromARGB(255, 244, 43, 75)),
                                   ),
                                 ),
                               )),
-
                           Container(
-                              margin: EdgeInsets.only(
-                                  right: 500.w,
-                                  bottom: 10.h),
+                              margin:
+                                  EdgeInsets.only(right: 500.w, bottom: 10.h),
                               child: Text(
                                 "CPF",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.grey[700],
                                     fontSize: 32.sp),
-                              )
-                          ),
+                              )),
                           Container(
-                              margin: EdgeInsets.only(
-                                  bottom: 20.h),
+                              margin: EdgeInsets.only(bottom: 20.h),
                               width: 620.w,
                               height: ScreenUtil().setHeight(65),
                               child: TextFormField(
@@ -152,49 +140,43 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     fontSize: 34.sp,
                                     color: Colors.grey[700]),
                                 keyboardType: TextInputType.number,
-                                validator: (text){
-                                  if(text.isEmpty || text.length < 11){
+                                validator: (text) {
+                                  if (text!.isEmpty || text.length < 11) {
                                     return null;
-                                  }
-                                  else
+                                  } else
                                     return null;
                                 },
                                 decoration: InputDecoration(
                                   hintText: '000.000.000-00',
                                   contentPadding:
-                                  EdgeInsets.fromLTRB(50.w, 1.h, 50.w, 1.h),
+                                      EdgeInsets.fromLTRB(50.w, 1.h, 50.w, 1.h),
                                   enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(30.sp)),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(30.sp)),
                                     borderSide: BorderSide(
                                         color: Theme.of(context).primaryColor),
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(30.sp)),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(30.sp)),
                                     borderSide: BorderSide(
-                                        color: Color.fromARGB(255, 244, 43, 75)),
+                                        color:
+                                            Color.fromARGB(255, 244, 43, 75)),
                                   ),
                                 ),
                               )),
-
-
-
                           Container(
-                              margin: EdgeInsets.only(
-                                  right: 430.w,
-                                  bottom: 10.h),
+                              margin:
+                                  EdgeInsets.only(right: 430.w, bottom: 10.h),
                               child: Text(
                                 "Endereço",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.grey[700],
                                     fontSize: 32.sp),
-                              )
-                          ),
+                              )),
                           Container(
-                              margin: EdgeInsets.only(
-                                  bottom: 20.h),
+                              margin: EdgeInsets.only(bottom: 20.h),
                               width: 620.w,
                               height: ScreenUtil().setHeight(65),
                               child: TextFormField(
@@ -204,49 +186,43 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     fontSize: 34.sp,
                                     color: Colors.grey[700]),
                                 keyboardType: TextInputType.streetAddress,
-                                validator: (text){
-                                  if(text.isEmpty){
+                                validator: (text) {
+                                  if (text!.isEmpty) {
                                     return null;
-                                  }
-                                  else
+                                  } else
                                     return null;
                                 },
                                 decoration: InputDecoration(
                                   hintText: 'seu endereço completo',
                                   contentPadding:
-                                  EdgeInsets.fromLTRB(50.w, 1.h, 50.w, 1.h),
+                                      EdgeInsets.fromLTRB(50.w, 1.h, 50.w, 1.h),
                                   enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(30.sp)),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(30.sp)),
                                     borderSide: BorderSide(
                                         color: Theme.of(context).primaryColor),
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(30.sp)),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(30.sp)),
                                     borderSide: BorderSide(
-                                        color: Color.fromARGB(255, 244, 43, 75)),
+                                        color:
+                                            Color.fromARGB(255, 244, 43, 75)),
                                   ),
                                 ),
                               )),
-
-
-
                           Container(
-                              margin: EdgeInsets.only(
-                                  right: 460.w,
-                                  bottom: 10.h),
+                              margin:
+                                  EdgeInsets.only(right: 460.w, bottom: 10.h),
                               child: Text(
                                 "E-mail",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.grey[700],
                                     fontSize: 32.sp),
-                              )
-                          ),
+                              )),
                           Container(
-                              margin: EdgeInsets.only(
-                                  bottom: 20.h),
+                              margin: EdgeInsets.only(bottom: 20.h),
                               width: 620.w,
                               height: ScreenUtil().setHeight(65),
                               child: TextFormField(
@@ -256,28 +232,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     fontSize: 34.sp,
                                     color: Colors.grey[700]),
                                 keyboardType: TextInputType.emailAddress,
-                                validator: (text){
-                                  if(text.isEmpty || !text.contains("@")){
+                                validator: (text) {
+                                  if (text!.isEmpty || !text.contains("@")) {
                                     return null;
-                                  }
-                                  else
+                                  } else
                                     return null;
                                 },
                                 decoration: InputDecoration(
                                   hintText: 'seuemail@email.com',
                                   contentPadding:
-                                  EdgeInsets.fromLTRB(50.w, 1.h, 50.w, 1.h),
+                                      EdgeInsets.fromLTRB(50.w, 1.h, 50.w, 1.h),
                                   enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(30.sp)),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(30.sp)),
                                     borderSide: BorderSide(
                                         color: Theme.of(context).primaryColor),
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(30.sp)),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(30.sp)),
                                     borderSide: BorderSide(
-                                        color: Color.fromARGB(255, 244, 43, 75)),
+                                        color:
+                                            Color.fromARGB(255, 244, 43, 75)),
                                   ),
                                 ),
                               )),
@@ -291,11 +267,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     fontWeight: FontWeight.bold,
                                     color: Colors.grey[700],
                                     fontSize: 32.sp),
-                              )
-                          ),
+                              )),
                           Container(
-                              margin: EdgeInsets.only(
-                                  bottom: 50.h),
+                              margin: EdgeInsets.only(bottom: 50.h),
                               width: 620.w,
                               height: ScreenUtil().setHeight(65),
                               child: TextFormField(
@@ -308,23 +282,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 decoration: InputDecoration(
                                   hintText: '*******',
                                   contentPadding:
-                                  EdgeInsets.fromLTRB(50.w, 1.h, 50.w, 1.h),
+                                      EdgeInsets.fromLTRB(50.w, 1.h, 50.w, 1.h),
                                   enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(30.sp)),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(30.sp)),
                                     borderSide: BorderSide(
                                         color: Theme.of(context).primaryColor),
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(30.sp)),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(30.sp)),
                                     borderSide: BorderSide(
-                                        color: Color.fromARGB(255, 244, 43, 75)),
+                                        color:
+                                            Color.fromARGB(255, 244, 43, 75)),
                                   ),
                                 ),
                                 obscureText: true,
-                                validator: (text){
-                                  if(text.isEmpty || text.length < 6)
+                                validator: (text) {
+                                  if (text!.isEmpty || text.length < 6)
                                     return null;
                                   else
                                     return null;
@@ -337,31 +312,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 child: Text('Criar Conta',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        color:
-                                        Color.fromARGB(255, 255, 255, 255))),
+                                        color: Color.fromARGB(
+                                            255, 255, 255, 255))),
                                 color: Theme.of(context).primaryColor,
                                 onPressed: () {
-                                  if(_formkey.currentState.validate()){
-
+                                  if (_formkey.currentState!.validate()) {
                                     Map<String, dynamic> userData = {
-                                      "name" : _nameController.text,
-                                      "cpf" : _cpfController.text,
-                                      "endereco" : _enderecoController.text,
-                                      "email" : _emailController.text,
+                                      "name": _nameController.text,
+                                      "cpf": _cpfController.text,
+                                      "endereco": _enderecoController.text,
+                                      "email": _emailController.text,
                                     };
 
-                                    model.signUp(userData: userData, pass: _senhaController.text, onSuccess: _onSuccess, onFail: _onFail);
+                                    model.signUp(
+                                        userData: userData,
+                                        pass: _senhaController.text,
+                                        onSuccess: _onSuccess,
+                                        onFail: _onFail);
                                   }
                                 },
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: new BorderRadius.circular(30.sp),
+                                  borderRadius:
+                                      new BorderRadius.circular(30.sp),
                                 ),
                               )),
-
                         ]),
                   );
-                }
-              )
+              })
             ],
           ),
         ],
@@ -370,24 +347,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void _onFail() {
-
-    _scaffoldKey.currentState.showSnackBar(
-        SnackBar(content: Text("Falha ao entrar!"),
-          backgroundColor: Colors.redAccent,
-          duration: Duration(seconds: 2),
-        )
-    );
-
+    _scaffoldKey.currentState!.showSnackBar(SnackBar(
+      content: Text("Falha ao entrar!"),
+      backgroundColor: Colors.redAccent,
+      duration: Duration(seconds: 2),
+    ));
   }
 
   void _onSuccess() {
-    _scaffoldKey.currentState.showSnackBar(
-      SnackBar(content: Text("Usuário criado com sucesso!"),
-        backgroundColor: Theme.of(context).primaryColor,
-        duration: Duration(seconds: 2),
-      )
-    );
-    Future.delayed(Duration(seconds: 2)).then((_){
+    _scaffoldKey.currentState!.showSnackBar(SnackBar(
+      content: Text("Usuário criado com sucesso!"),
+      backgroundColor: Theme.of(context).primaryColor,
+      duration: Duration(seconds: 2),
+    ));
+    Future.delayed(Duration(seconds: 2)).then((_) {
       Navigator.of(context).pop();
     });
   }
