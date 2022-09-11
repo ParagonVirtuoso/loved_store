@@ -78,7 +78,9 @@ class HomeTab extends StatelessWidget {
                                 bottom: ScreenUtil().setHeight(15.0)),
                             child: InkWell(
                               onTap: () {
-                                pageController.jumpToPage(5);
+                                pageController.animateToPage(1,
+                                    duration: Duration(milliseconds: 500),
+                                    curve: Curves.ease);
                               },
                               child: ClipRRect(
                                   borderRadius: BorderRadius.all(
