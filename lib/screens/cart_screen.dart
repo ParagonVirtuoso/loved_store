@@ -60,22 +60,24 @@ class CartScreen extends StatelessWidget {
                 SizedBox(
                   height: 16.0,
                 ),
-                RaisedButton(
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => LoginScreen()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).primaryColor,
+                  ),
                   child: Text(
                     "Entrar",
                     style: TextStyle(fontSize: 18.0),
                   ),
-                  textColor: Colors.white,
-                  color: Theme.of(context).primaryColor,
-                  onPressed: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => LoginScreen()));
-                  },
                 )
               ],
             ),
           );
-        } else if (model.products == null || model.products.length == 0) {
+        } else if (model.products.length == 0) {
           return Center(
             child: Text(
               "Nenhum produto no carrinho!",
@@ -95,9 +97,8 @@ class CartScreen extends StatelessWidget {
               ShipCard(),
               CartPrice(() async {
                 String orderId = await model.finishOrder();
-                if (orderId != null)
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => OrderScreen(orderId)));
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => OrderScreen(orderId)));
               }),
             ],
           );
