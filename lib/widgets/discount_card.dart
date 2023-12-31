@@ -29,22 +29,13 @@ class DiscountCard extends StatelessWidget {
                     .doc(text)
                     .get()
                     .then((docSnap) {
-                  if (docSnap.data != null) {
-                    CartModel.of(context)
-                        .setCoupon(text, docSnap.data()?["percent"]);
-                    Scaffold.of(context).showSnackBar(SnackBar(
-                      content: Text(
-                          "Desconto de ${docSnap.data()?["percent"]}% aplicado!"),
-                      backgroundColor: Theme.of(context).primaryColor,
-                    ));
-                  } else {
-                    CartModel.of(context).setCoupon('', 0);
-                    Scaffold.of(context).showSnackBar(SnackBar(
-                      content: Text("Cupom não existente!"),
-                      backgroundColor: Colors.redAccent,
-                    ));
-                  }
-                });
+                  CartModel.of(context)
+                      .setCoupon(text, docSnap.data()?["percent"]);
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text("Desconto de ${docSnap.data()?["percent"]}% aplicado!"),
+                    backgroundColor: Theme.of(context).primaryColor,
+                  ));
+                                });
               },
             ),
           )

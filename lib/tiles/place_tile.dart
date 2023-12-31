@@ -47,7 +47,7 @@ class PlaceTile extends StatelessWidget {
                 },
                 child: Text("Ver no Mapa"),
                 style: TextButton.styleFrom(
-                  primary: Colors.blue,
+                  foregroundColor: Colors.blue,
                 ),
               ),
               TextButton(
@@ -56,7 +56,7 @@ class PlaceTile extends StatelessWidget {
                 },
                 child: Text("Ligar"),
                 style: TextButton.styleFrom(
-                  primary: Colors.blue,
+                  foregroundColor: Colors.blue,
                 ),
               ),
             ],

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loved_store/models/user_model.dart';
@@ -19,11 +18,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _emailController = TextEditingController();
   final _senhaController = TextEditingController();
 
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         leading: IconButton(
@@ -308,13 +305,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           Container(
                               width: 400.w,
                               height: 80.h,
-                              child: RaisedButton(
-                                child: Text('Criar Conta',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color.fromARGB(
-                                            255, 255, 255, 255))),
-                                color: Theme.of(context).primaryColor,
+                              child: ElevatedButton(
                                 onPressed: () {
                                   if (_formkey.currentState!.validate()) {
                                     Map<String, dynamic> userData = {
@@ -325,15 +316,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     };
 
                                     model.signUp(
-                                        userData: userData,
-                                        pass: _senhaController.text,
-                                        onSuccess: _onSuccess,
-                                        onFail: _onFail);
+                                      userData: userData,
+                                      pass: _senhaController.text,
+                                      onSuccess: _onSuccess,
+                                      onFail: _onFail,
+                                    );
                                   }
                                 },
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      new BorderRadius.circular(30.sp),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Theme.of(context).primaryColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30.sp),
+                                  ),
+                                ),
+                                child: Text(
+                                  'Criar Conta',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               )),
                         ]),
@@ -347,7 +348,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void _onFail() {
-    _scaffoldKey.currentState!.showSnackBar(SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text("Falha ao entrar!"),
       backgroundColor: Colors.redAccent,
       duration: Duration(seconds: 2),
@@ -355,7 +356,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void _onSuccess() {
-    _scaffoldKey.currentState!.showSnackBar(SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text("Usuário criado com sucesso!"),
       backgroundColor: Theme.of(context).primaryColor,
       duration: Duration(seconds: 2),
