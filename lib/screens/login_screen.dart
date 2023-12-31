@@ -16,12 +16,9 @@ class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _senhaController = TextEditingController();
 
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         leading: IconButton(
@@ -165,85 +162,102 @@ class _LoginScreenState extends State<LoginScreen> {
                             Container(
                                 width: 400.w,
                                 height: 80.h,
-                                child: RaisedButton(
-                                  child: Text('ENTRAR',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Color.fromARGB(
-                                              255, 255, 255, 255))),
-                                  color: Theme.of(context).primaryColor,
+                                child: ElevatedButton(
                                   onPressed: () {
-                                    if (_formkey.currentState!.validate()) {}
-                                    model.signIn(
+                                    if (_formkey.currentState!.validate()) {
+                                      model.signIn(
                                         email: _emailController.text,
                                         pass: _senhaController.text,
                                         onSuccess: _onSuccess,
-                                        onFail: _onFail);
+                                        onFail: _onFail,
+                                      );
+                                    }
                                   },
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        new BorderRadius.circular(30.sp),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                        Theme.of(context).primaryColor,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(30.sp),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    'ENTRAR',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 )),
                             Row(
                               children: [
                                 Container(
-                                  margin: EdgeInsets.only(
-                                      top: ScreenUtil().setHeight(50),
-                                      left: ScreenUtil().setWidth(40)),
-                                  child: FlatButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pushReplacement(
+                                    margin: EdgeInsets.only(
+                                        top: ScreenUtil().setHeight(50),
+                                        left: ScreenUtil().setWidth(40)),
+                                    child: TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pushReplacement(
                                           MaterialPageRoute(
-                                              builder: (context) =>
-                                                  SignUpScreen()));
-                                    },
-                                    child: Text(
-                                      'Cadastrar-se',
-                                      style: TextStyle(
+                                            builder: (context) =>
+                                                SignUpScreen(),
+                                          ),
+                                        );
+                                      },
+                                      style: TextButton.styleFrom(
+                                        foregroundColor:
+                                            Color.fromARGB(255, 150, 150, 150),
+                                      ),
+                                      child: Text(
+                                        'Cadastrar-se',
+                                        style: TextStyle(
                                           fontSize: 27.sp,
-                                          color: Color.fromARGB(
-                                              255, 150, 150, 150)),
-                                    ),
-                                  ),
-                                ),
+                                        ),
+                                      ),
+                                    )),
                                 Container(
-                                  margin: EdgeInsets.only(
-                                      top: ScreenUtil().setHeight(50),
-                                      left: ScreenUtil().setWidth(230)),
-                                  child: FlatButton(
-                                    padding: EdgeInsets.zero,
-                                    onPressed: () {
-                                      if (_emailController.text.isEmpty) {
-                                        _scaffoldKey.currentState!
-                                            .showSnackBar(SnackBar(
-                                          content: Text(
-                                              "Insira o email para recuperação!"),
-                                          backgroundColor: Colors.redAccent,
-                                          duration: Duration(seconds: 2),
-                                        ));
-                                      } else {
-                                        model
-                                            .recoverPass(_emailController.text);
-                                        _scaffoldKey.currentState!
-                                            .showSnackBar(SnackBar(
-                                          content: Text(
-                                              "Recuperação enviada ao seu Email!"),
-                                          backgroundColor:
-                                              Theme.of(context).primaryColor,
-                                          duration: Duration(seconds: 2),
-                                        ));
-                                      }
-                                    },
-                                    child: Text(
-                                      'Esqueci a senha',
-                                      style: TextStyle(
+                                    margin: EdgeInsets.only(
+                                        top: ScreenUtil().setHeight(50),
+                                        left: ScreenUtil().setWidth(230)),
+                                    child: TextButton(
+                                      onPressed: () {
+                                        if (_emailController.text.isEmpty) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                  "Insira o email para recuperação!"),
+                                              backgroundColor: Colors.redAccent,
+                                              duration: Duration(seconds: 2),
+                                            ),
+                                          );
+                                        } else {
+                                          model.recoverPass(
+                                              _emailController.text);
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                  "Recuperação enviada ao seu Email!"),
+                                              backgroundColor: Theme.of(context)
+                                                  .primaryColor,
+                                              duration: Duration(seconds: 2),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                      style: TextButton.styleFrom(
+                                        padding: EdgeInsets.zero,
+                                        foregroundColor:
+                                            Color.fromARGB(255, 150, 150, 150),
+                                      ),
+                                      child: Text(
+                                        'Esqueci a senha',
+                                        style: TextStyle(
                                           fontSize: 27.sp,
-                                          color: Color.fromARGB(
-                                              255, 150, 150, 150)),
-                                    ),
-                                  ),
-                                ),
+                                        ),
+                                      ),
+                                    )),
                               ],
                             ),
                             Row(
@@ -292,11 +306,21 @@ class _LoginScreenState extends State<LoginScreen> {
                                               top: ScreenUtil().setHeight(40)),
                                           width: ScreenUtil().setWidth(250),
                                           height: ScreenUtil().setHeight(55),
-                                          child: RaisedButton(
-                                            padding: EdgeInsets.fromLTRB(
-                                                20.0, 2.5, 2.5, 5.0),
-                                            color: Color.fromARGB(
-                                                255, 255, 255, 255),
+                                          child: ElevatedButton(
+                                            onPressed: () {},
+                                            style: ElevatedButton.styleFrom(
+                                              padding: EdgeInsets.fromLTRB(
+                                                  20.0, 2.5, 2.5, 5.0),
+                                              backgroundColor: Color.fromARGB(
+                                                  255, 255, 255, 255),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(18.0),
+                                                side: BorderSide(
+                                                    color: Color.fromARGB(
+                                                        255, 104, 104, 104)),
+                                              ),
+                                            ),
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.spaceEvenly,
@@ -313,26 +337,18 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   margin: EdgeInsets.only(
                                                       right: ScreenUtil()
                                                           .setWidth(40)),
-                                                  child: Text('Google',
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              104,
-                                                              104,
-                                                              104))),
-                                                )
+                                                  child: Text(
+                                                    'Google',
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Color.fromARGB(
+                                                          255, 104, 104, 104),
+                                                    ),
+                                                  ),
+                                                ),
                                               ],
                                             ),
-                                            onPressed: () {},
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    new BorderRadius.circular(
-                                                        18.0),
-                                                side: BorderSide(
-                                                    color: Color.fromARGB(
-                                                        255, 104, 104, 104))),
                                           )),
                                       Container(),
                                       Container(
@@ -340,11 +356,21 @@ class _LoginScreenState extends State<LoginScreen> {
                                               top: ScreenUtil().setHeight(40)),
                                           width: ScreenUtil().setWidth(250),
                                           height: ScreenUtil().setHeight(55),
-                                          child: RaisedButton(
-                                            padding: EdgeInsets.fromLTRB(
-                                                20.0, 2.5, 2.5, 5.0),
-                                            color: Color.fromARGB(
-                                                255, 255, 255, 255),
+                                          child: ElevatedButton(
+                                            onPressed: () {},
+                                            style: ElevatedButton.styleFrom(
+                                              padding: EdgeInsets.fromLTRB(
+                                                  20.0, 2.5, 2.5, 5.0),
+                                              backgroundColor: Color.fromARGB(
+                                                  255, 255, 255, 255),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(18.0),
+                                                side: BorderSide(
+                                                    color: Color.fromARGB(
+                                                        255, 104, 104, 104)),
+                                              ),
+                                            ),
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.spaceEvenly,
@@ -361,26 +387,18 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   margin: EdgeInsets.only(
                                                       right: ScreenUtil()
                                                           .setWidth(25)),
-                                                  child: Text('Facebook',
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              104,
-                                                              104,
-                                                              104))),
-                                                )
+                                                  child: Text(
+                                                    'Facebook',
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Color.fromARGB(
+                                                          255, 104, 104, 104),
+                                                    ),
+                                                  ),
+                                                ),
                                               ],
                                             ),
-                                            onPressed: () {},
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    new BorderRadius.circular(
-                                                        18.0),
-                                                side: BorderSide(
-                                                    color: Color.fromARGB(
-                                                        255, 104, 104, 104))),
                                           )),
                                     ],
                                   ),
@@ -399,19 +417,24 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _onFail() {
-    _scaffoldKey.currentState!.showSnackBar(SnackBar(
-      content: Text("Falha ao entrar, verifique o email ou senha!"),
-      backgroundColor: Colors.redAccent,
-      duration: Duration(seconds: 2),
-    ));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Falha ao entrar, verifique o email ou senha!"),
+        backgroundColor: Colors.redAccent,
+        duration: Duration(seconds: 2),
+      ),
+    );
   }
 
   void _onSuccess() {
-    _scaffoldKey.currentState!.showSnackBar(SnackBar(
-      content: Text("Login realizado com sucesso!"),
-      backgroundColor: Theme.of(context).primaryColor,
-      duration: Duration(seconds: 2),
-    ));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Login realizado com sucesso!"),
+        backgroundColor: Theme.of(context).primaryColor,
+        duration: Duration(seconds: 2),
+      ),
+    );
+
     Future.delayed(Duration(seconds: 1)).then((_) {
       Navigator.of(context).pop();
     });
